@@ -35,7 +35,7 @@ end
 ## Usage
 
 ```swift
-let textView: SZTextView = SZTextView()
+let textView: JMTextView = JMTextView()
 textView.placeholder = "Enter lorem ipsum here"
 textView.placeholderTextColor = UIColor.lightGray
 ```
@@ -43,10 +43,10 @@ textView.placeholderTextColor = UIColor.lightGray
 Analogously you can use the `attributedPlaceholder` property to set a fancy `NSAttributedString` as the placeholder:
 
 ```swift
-        let placeholder: NSMutableAttributedString = NSMutableAttributedString(string: "your lorem ipsum here")
-        placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(0, 2))
-        placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSMakeRange(2, 4))
-        placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.blue, range: NSMakeRange(6, 4))
+let placeholder: NSMutableAttributedString = NSMutableAttributedString(string: "your lorem ipsum here")
+placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(0, 2))
+placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSMakeRange(2, 4))
+placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.blue, range: NSMakeRange(6, 4))
 
 textView.attributedPlaceholder = placeholder;
 ```
