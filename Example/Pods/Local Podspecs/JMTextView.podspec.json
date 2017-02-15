@@ -1,0 +1,22 @@
+{
+  "name": "JMTextView",
+  "version": "0.1.0",
+  "summary": "A short description of JMTextView.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/jmeggesto/JMTextView",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "jmeggesto": "jackie.meggesto@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/jmeggesto/JMTextView.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "JMTextView/Classes/**/*"
+}
