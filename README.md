@@ -42,11 +42,11 @@ textView.placeholderTextColor = UIColor.lightGray
 
 Analogously you can use the `attributedPlaceholder` property to set a fancy `NSAttributedString` as the placeholder:
 
-```objc
-NSMutableAttributedString *placeholder = [[NSMutableAttributedString alloc] initWithString:@"Enter lorem ipsum here"];
-[placeholder addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0,2)];
-[placeholder addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(2,4)];
-[placeholder addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(6,4)];
+```swift
+        let placeholder: NSMutableAttributedString = NSMutableAttributedString(string: "your lorem ipsum here")
+        placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(0, 2))
+        placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSMakeRange(2, 4))
+        placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.blue, range: NSMakeRange(6, 4))
 
 textView.attributedPlaceholder = placeholder;
 ```
