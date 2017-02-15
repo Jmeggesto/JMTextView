@@ -29,6 +29,17 @@ class JMTextViewTests: XCTestCase {
         textView?.font = UIFont.systemFont(ofSize: 20.0)
         XCTAssertEqual(placeholderTextView?.font, textView?.font, "label and text view should have equal fonts")
     }
+    func testAttributedPlaceholderText() {
+        let placeholder: NSMutableAttributedString = NSMutableAttributedString(string: "SZTextView")
+        placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(0, 2))
+        placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSMakeRange(2, 4))
+        placeholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.blue, range: NSMakeRange(6, 4))
+        textView?.attributedPlaceholder = placeholder
+        XCTAssertEqual(textView?.attributedPlaceholder?.string, "SZTextView", "-attributedPlaceholder string should be set")
+        XCTAssertEqual(textView?.placeholder, "SZTextView", "-placeholder should return a non-attributed copy of -attributedPlacholder")
+        textView?.placeholder = "AnotherPlaceholder"
+        XCTAssertEqual(textView?.attributedPlaceholder?.string, "AnotherPlaceholder", "setting a non-attributed placeholder after setting an attributed placholder should copy the text")
+    }
     
     
 }
