@@ -20,28 +20,28 @@ public class JMTextView: UITextView {
     private var _placeHolder: String?
     private var _attributedPlaceholder: NSAttributedString?
     
-    @IBInspectable public var placeholder: String? {
+    @IBInspectable dynamic public var placeholder: String? {
         
         get {
-            return _placeHolder
+            return self._placeHolder
         }
         set(newValue) {
             
-            _placeHolder = newValue
-            _attributedPlaceholder = NSAttributedString(string: newValue!)
-            resizePlaceholderFrame()
+            self._placeHolder = newValue
+            self._attributedPlaceholder = NSAttributedString(string: newValue!)
+            self.resizePlaceholderFrame()
         }
         
     }
-    public var attributedPlaceholder: NSAttributedString? {
+    public dynamic var attributedPlaceholder: NSAttributedString? {
         
         get {
-            return _attributedPlaceholder
+            return self._attributedPlaceholder
         }
         set(newValue) {
-            _placeHolder = newValue?.string
-            _attributedPlaceholder = newValue?.copy() as? NSAttributedString
-            resizePlaceholderFrame()
+            self._placeHolder = newValue?.string
+            self._attributedPlaceholder = newValue?.copy() as? NSAttributedString
+            self.resizePlaceholderFrame()
         }
         
     }
@@ -51,10 +51,10 @@ public class JMTextView: UITextView {
     public var placeholderTextColor: UIColor? {
         
         get {
-            return _placeholderTextView?.textColor
+            return self._placeholderTextView?.textColor
         }
         set(newValue) {
-            _placeholderTextView?.textColor = newValue
+            self._placeholderTextView?.textColor = newValue
         }
         
     }
@@ -75,60 +75,60 @@ public class JMTextView: UITextView {
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        preparePlaceholder()
+        self.preparePlaceholder()
     }
     override public init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
-        preparePlaceholder()
+        self.preparePlaceholder()
     }
     
     private func preparePlaceholder() {
         
-        assert(_placeholderTextView == nil, "placeholder has been prepared already: \(_placeholderTextView)")
+        assert(self._placeholderTextView == nil, "placeholder has been prepared already: \(self._placeholderTextView)")
         
         let frame = bounds
-        _placeholderTextView = UITextView(frame:frame)
-        _placeholderTextView?.isOpaque = false
-        _placeholderTextView?.backgroundColor = UIColor.clear
-        _placeholderTextView?.textColor = UIColor.init(white: 0.7, alpha: 0.7)
-        _placeholderTextView?.textAlignment = textAlignment;
-        _placeholderTextView?.isEditable = false
-        _placeholderTextView?.isScrollEnabled = false
-        _placeholderTextView?.isUserInteractionEnabled = false
-        _placeholderTextView?.font = font;
-        _placeholderTextView?.isAccessibilityElement = false
-        _placeholderTextView?.contentOffset = contentOffset;
-        _placeholderTextView?.contentInset = contentInset;
+        self._placeholderTextView = UITextView(frame:frame)
+        self._placeholderTextView?.isOpaque = false
+        self._placeholderTextView?.backgroundColor = UIColor.clear
+        self._placeholderTextView?.textColor = UIColor.init(white: 0.7, alpha: 0.7)
+        self._placeholderTextView?.textAlignment = textAlignment;
+        self._placeholderTextView?.isEditable = false
+        self._placeholderTextView?.isScrollEnabled = false
+        self._placeholderTextView?.isUserInteractionEnabled = false
+        self._placeholderTextView?.font = font;
+        self._placeholderTextView?.isAccessibilityElement = false
+        self._placeholderTextView?.contentOffset = contentOffset;
+        self._placeholderTextView?.contentInset = contentInset;
         
-        if (_placeholderTextView!.responds(to: #selector(getter: UITextView.isSelectable))) {
-            _placeholderTextView?.isSelectable = false
+        if (self._placeholderTextView!.responds(to: #selector(getter: UITextView.isSelectable))) {
+            self._placeholderTextView?.isSelectable = false
         }
         
         if (HAS_TEXT_CONTAINER(x: self)) {
-            _placeholderTextView?.textContainer.exclusionPaths = textContainer.exclusionPaths;
-            _placeholderTextView?.textContainer.lineFragmentPadding = textContainer.lineFragmentPadding;
+            self._placeholderTextView?.textContainer.exclusionPaths = textContainer.exclusionPaths;
+            self._placeholderTextView?.textContainer.lineFragmentPadding = textContainer.lineFragmentPadding;
         }
         if (HAS_TEXT_CONTAINER_INSETS(x: self)) {
-            _placeholderTextView?.textContainerInset = textContainerInset;
+            self._placeholderTextView?.textContainerInset = textContainerInset;
         }
         if (attributedPlaceholder != nil) {
-            _placeholderTextView?.attributedText = attributedPlaceholder;
+            self._placeholderTextView?.attributedText = self.attributedPlaceholder;
         } else if (placeholder != nil ) {
-            _placeholderTextView?.text = placeholder;
+            self._placeholderTextView?.text = self.placeholder;
         }
         
-        setPlaceHolderVisibleForText(text: text)
+        self.setPlaceHolderVisibleForText(text: text)
         
-        clipsToBounds = true
+        self.clipsToBounds = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(JMTextView.textDidChange(notification:)), name: NSNotification.Name.UITextViewTextDidChange, object: self)
         
-        addObserver(self, forKeyPath: kAttributedPlaceholderKey, options: .new, context: nil)
-        addObserver(self, forKeyPath: kPlaceholderKey, options: .new, context: nil)
-        addObserver(self, forKeyPath: kFontKey, options: .new, context: nil)
-        addObserver(self, forKeyPath: kAttributedTextKey, options: .new, context: nil)
-        addObserver(self, forKeyPath: kTextKey, options: .new, context: nil)
-        addObserver(self, forKeyPath: kTextAlignmentKey, options: .new, context: nil)
+        self.addObserver(self, forKeyPath: kAttributedPlaceholderKey, options: .new, context: nil)
+        self.addObserver(self, forKeyPath: kPlaceholderKey, options: .new, context: nil)
+        self.addObserver(self, forKeyPath: kFontKey, options: .new, context: nil)
+        self.addObserver(self, forKeyPath: kAttributedTextKey, options: .new, context: nil)
+        self.addObserver(self, forKeyPath: kTextKey, options: .new, context: nil)
+        self.addObserver(self, forKeyPath: kTextAlignmentKey, options: .new, context: nil)
         
         if(HAS_TEXT_CONTAINER(x: self)) {
             textContainer.addObserver(self, forKeyPath: kExclusionPathsKey, options: .new, context: nil)
@@ -141,21 +141,21 @@ public class JMTextView: UITextView {
     }
     override public func layoutSubviews() {
         super.layoutSubviews()
-        resizePlaceholderFrame()
+        self.resizePlaceholderFrame()
     }
     
     
     func textDidChange(notification: NSNotification) {
-        setPlaceHolderVisibleForText(text: text)
+        self.setPlaceHolderVisibleForText(text: text)
     }
     
     func resizePlaceholderFrame() {
         
-        guard var frame = _placeholderTextView?.frame else {
+        guard var frame = self._placeholderTextView?.frame else {
             return
         }
         frame.size = bounds.size
-        _placeholderTextView?.frame = frame
+        self._placeholderTextView?.frame = frame
     }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -163,49 +163,49 @@ public class JMTextView: UITextView {
         
         if keyPath == kAttributedPlaceholderKey {
             if let attributedString = change?[NSKeyValueChangeKey.newKey] as? NSAttributedString {
-                _placeholderTextView?.attributedText = attributedString
+                self._placeholderTextView?.attributedText = attributedString
             }
         }
         if keyPath == kPlaceholderKey {
             if let placeholderString = change?[NSKeyValueChangeKey.newKey] as? String {
-                _placeholderTextView?.text = placeholderString
+                self._placeholderTextView?.text = placeholderString
             }
         }
         if keyPath == kFontKey {
             if let font = change?[NSKeyValueChangeKey.newKey] as? UIFont {
-                _placeholderTextView?.font = font
+                self._placeholderTextView?.font = font
             }
         }
         if keyPath == kAttributedTextKey {
             if let attributedString = change?[NSKeyValueChangeKey.newKey] as? NSAttributedString {
-                setPlaceHolderVisibleForText(text: attributedString.string)
+                self.setPlaceHolderVisibleForText(text: attributedString.string)
             }
         }
         if keyPath == kTextKey {
             if let newText = change?[NSKeyValueChangeKey.newKey] as? String {
-                setPlaceHolderVisibleForText(text: newText)
+                self.setPlaceHolderVisibleForText(text: newText)
             }
         }
         if keyPath == kExclusionPathsKey {
             if let exclusionPaths = change?[NSKeyValueChangeKey.newKey] as? [UIBezierPath] {
-                _placeholderTextView?.textContainer.exclusionPaths = exclusionPaths
-                resizePlaceholderFrame()
+                self._placeholderTextView?.textContainer.exclusionPaths = exclusionPaths
+                self.resizePlaceholderFrame()
             }
         }
         if keyPath == kLineFragmentPaddingKey {
             if let paddingValue = change?[NSKeyValueChangeKey.newKey] as? CGFloat {
-                _placeholderTextView?.textContainer.lineFragmentPadding = paddingValue
-                resizePlaceholderFrame()
+                self._placeholderTextView?.textContainer.lineFragmentPadding = paddingValue
+                self.resizePlaceholderFrame()
             }
         }
         if keyPath == kTextContainerInsetKey {
             if let value = change?[NSKeyValueChangeKey.newKey] as? NSValue {
-                _placeholderTextView?.textContainerInset = value.uiEdgeInsetsValue
+                self._placeholderTextView?.textContainerInset = value.uiEdgeInsetsValue
             }
         }
         if keyPath == kTextAlignmentKey {
             if let alignment = change?[NSKeyValueChangeKey.newKey] as? NSTextAlignment {
-                _placeholderTextView?.textAlignment = alignment
+                self._placeholderTextView?.textAlignment = alignment
             }
         }
         
@@ -213,11 +213,11 @@ public class JMTextView: UITextView {
     
     override public func becomeFirstResponder() -> Bool {
         
-        setPlaceHolderVisibleForText(text: text)
+        self.setPlaceHolderVisibleForText(text: text)
         return super.becomeFirstResponder()
     }
     func hasFadeTime() -> Bool {
-        if let fade = fadeTime {
+        if let fade = self.fadeTime {
             return fade > 0.0
         }
         return false
@@ -225,31 +225,31 @@ public class JMTextView: UITextView {
     
     func setPlaceHolderVisibleForText(text: String) {
         
-        guard let placeholderTextView = _placeholderTextView else {
+        guard let placeholderTextView = self._placeholderTextView else {
             return
         }
         
         if text.characters.count < 1 {
             
-            if hasFadeTime() {
+            if self.hasFadeTime() {
                 if !placeholderTextView.isDescendant(of: self) {
                     placeholderTextView.alpha = 0
                     addSubview(placeholderTextView)
                     sendSubview(toBack: placeholderTextView)
                 }
-                UIView.animate(withDuration: fadeTime!, animations: {
+                UIView.animate(withDuration: self.fadeTime!, animations: {
                     placeholderTextView.alpha = 1
                 })
             } else {
-                addSubview(placeholderTextView)
-                sendSubview(toBack: placeholderTextView)
+                self.addSubview(placeholderTextView)
+                self.sendSubview(toBack: placeholderTextView)
                 placeholderTextView.alpha = 1
             }
             
         } else {
             
-            if hasFadeTime() {
-                UIView.animate(withDuration: fadeTime!, animations: {
+            if self.hasFadeTime() {
+                UIView.animate(withDuration: self.fadeTime!, animations: {
                     placeholderTextView.alpha = 0
                 })
             } else {

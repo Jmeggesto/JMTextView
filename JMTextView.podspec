@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JMTextView'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = 'A replacement for UITextView that gives you a placeholder'
 
   s.homepage         = 'https://github.com/jmeggesto/JMTextView'
