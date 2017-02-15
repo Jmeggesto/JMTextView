@@ -24,7 +24,13 @@ Either clone this repo and add the project to your Xcode workspace, or use [Coco
 Add this to you Podfile:
 
 ```ruby
-	pod 'JMTextView'
+use_frameworks!
+target "YourXcodeProj" do
+  pod 'StringUtils', '~> 0.3.0'
+
+# where "YourXcodeProj" is the name of your project
+
+end
 ```
 ## Usage
 
