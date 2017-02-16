@@ -8,10 +8,10 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JMTextView'
-  s.version          = '0.3.0'
+  s.version          = '1.0.0'
   s.summary          = 'A replacement for UITextView that gives you a placeholder'
 
-  s.homepage         = 'https://github.com/jmeggesto/JMTextView'
+  s.homepage         = 'https://www.github.com/jmeggesto/JMTextView'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'jmeggesto' => 'jackie.meggesto@gmail.com' }
