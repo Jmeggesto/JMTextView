@@ -26,7 +26,7 @@ Add this to you Podfile:
 ```ruby
 use_frameworks!
 target "YourXcodeProj" do
-  pod 'JMTextView', '~> 0.3.0'
+  pod 'JMTextView', '~> 1.0.0'
 
 # where "YourXcodeProj" is the name of your project
 
